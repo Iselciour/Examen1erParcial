@@ -145,9 +145,6 @@ public class UsuarioDAO {
             UsuarioDAO.countEliminarUsuario = countEliminarUsuario++;
             
         } 
-//        catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        }
         finally{
             try {
                 close(stmt);

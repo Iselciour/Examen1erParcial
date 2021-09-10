@@ -13,12 +13,7 @@ public class testUsuarioTrans {
     
     public static void main(String[] args) {
         Connection conexion = null;
-        try {
-            conexion = Conexion.getConnection();
-            if(conexion.getAutoCommit()){
-                conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-            }
-            UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
+            
             Scanner lector = new Scanner(System.in);
         
             int i = 0;
@@ -41,37 +36,95 @@ public class testUsuarioTrans {
                 {
                     //Agregar
                     case 1:
-                        System.out.println("Usuario:");
-                        UserName = lector.nextLine();
-                        System.out.println("Contraseña:");
-                        UserContra = lector.nextLine();
-                        Usuario nuevaUsuario = new Usuario();
-                        nuevaUsuario.setUsername(UserName);
-                        nuevaUsuario.setPassw(UserContra);
-                        usuarioDAO.insertar(nuevaUsuario);
+                        UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
+                        try {
+                            conexion = Conexion.getConnection();
+                            if(conexion.getAutoCommit()){
+                            conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
+                            }
+                            System.out.println("Usuario:");
+                            UserName = lector.nextLine();
+                            System.out.println("Contraseña:");
+                            UserContra = lector.nextLine();
+                            Usuario nuevaUsuario = new Usuario();
+                            nuevaUsuario.setUsername(UserName);
+                            nuevaUsuario.setPassw(UserContra);
+                            usuarioDAO.insertar(nuevaUsuario);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace(System.out);
+                            System.out.println("Entramos al rollback - no fue posible realizar cambios");
+                        try {
+                            conexion.rollback();
+                            } catch (SQLException ex1) {
+                                ex1.printStackTrace(System.out);
+                            }
+                        }
+                
                     break;
                     
                     //Actualizar
                     case 2:
-                        System.out.println("ID:");
-                        UserID = lector.nextInt();
-                        System.out.println("Usuario:");
-                        UserName = lector.nextLine();
-                        System.out.println("Contraseña:");
-                        UserContra = lector.nextLine();
-                        Usuario actualizarUsuario = new Usuario();
-                        actualizarUsuario.setIdUsuario(UserID);
-                        actualizarUsuario.setUsername(UserName);
-                        actualizarUsuario.setPassw(UserContra);
-                        usuarioDAO.actualizar(actualizarUsuario);
+                        UsuarioDAO usuarioDAOO = new UsuarioDAO(conexion);
+                        try {
+                            conexion = Conexion.getConnection();
+                            if(conexion.getAutoCommit()){
+                            conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
+                            }
+                            System.out.println("ID:");
+                            UserID = lector.nextInt();
+                            System.out.println("Usuario:");
+                            UserName = lector.nextLine();
+                            System.out.println("Contraseña:");
+                            UserContra = lector.nextLine();
+                            Usuario actualizarUsuario = new Usuario();
+                            actualizarUsuario.setIdUsuario(UserID);
+                            actualizarUsuario.setUsername(UserName);
+                            actualizarUsuario.setPassw(UserContra);
+                            usuarioDAOO.actualizar(actualizarUsuario);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace(System.out);
+                            System.out.println("Entramos al rollback - no fue posible realizar cambios");
+                        try {
+                            conexion.rollback();
+                            } catch (SQLException ex1) {
+                            ex1.printStackTrace(System.out);
+                            }
+                        }
+                
+                        
                     break;
                     
                     //Eliminar
                     case 3:
-                        System.out.println("ID:");
-                        UserID = lector.nextInt();
-                        Usuario usuarioEliminar = new Usuario(UserID);
-                        usuarioDAO.eliminar(usuarioEliminar);
+                        
+                        
+                        UsuarioDAO usuarioDAOOO = new UsuarioDAO(conexion);
+                        try {
+                            conexion = Conexion.getConnection();
+                            if(conexion.getAutoCommit()){
+                            conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
+                            }
+                            System.out.println("ID:");
+                            UserID = lector.nextInt();
+                            Usuario usuarioEliminar = new Usuario(UserID);
+                            usuarioDAOOO.eliminar(usuarioEliminar);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace(System.out);
+                            System.out.println("Entramos al rollback - no fue posible realizar cambios");
+                        try {
+                            conexion.rollback();
+                            } catch (SQLException ex1) {
+                            ex1.printStackTrace(System.out);
+                            }
+                        }
+                
+                        
+                        
+                    break;
+                    //Salir
+                    case 4:
+                        i = 4;
+                        System.out.println("Saliendo...");
                     break;
                     
                     default:
@@ -95,15 +148,6 @@ public class testUsuarioTrans {
             conexion.commit();
             System.out.println("Se realizaron correctamente las modificaciones en la BD");*/
             
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-            System.out.println("Entramos al rollback - no fue posible realizar cambios");
-            try {
-                conexion.rollback();
-            } catch (SQLException ex1) {
-                ex1.printStackTrace(System.out);
-            }
-        }
     }
     
 }
