@@ -24,8 +24,6 @@ public class testUsuarioTrans {
             int PerID = 0;
             String UserName = "" ,UserContra = "";
             String PerName = "", PerApellido = "", PerEmail = "", PerTel = "";
-            
-            
             do
             {
                 System.out.println("Acceder a: ");
@@ -129,13 +127,14 @@ public class testUsuarioTrans {
                                     } catch (SQLException ex) {
                                         ex.printStackTrace(System.out);
                                         System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                                    try {
-                                        conexion.rollback();
+                                        try {
+                                            conexion.rollback();
                                         } catch (SQLException ex1) {
                                             ex1.printStackTrace(System.out);
                                         }
                                     } 
                                 break;
+                                
                                 //Regresar
                                 case 4:
                                     i = 4;
@@ -178,7 +177,7 @@ public class testUsuarioTrans {
                                         PerApellido = lector.next();
                                         System.out.println("Email: ");
                                         PerEmail = lector.next();
-                                        System.out.println("Apellido: ");
+                                        System.out.println("Telefono: ");
                                         PerTel = lector.next();
                                         Persona nuevaPersona = new Persona();
                                         nuevaPersona.setNombre(PerName);
@@ -215,7 +214,7 @@ public class testUsuarioTrans {
                                         PerApellido = lector.next();
                                         System.out.println("Email: ");
                                         PerEmail = lector.next();
-                                        System.out.println("Apellido: ");
+                                        System.out.println("Telefono: ");
                                         PerTel = lector.next();
                                         Persona actualizarPersona = new Persona();
                                         actualizarPersona.setIdPersona(PerID);
@@ -262,7 +261,7 @@ public class testUsuarioTrans {
                                 break;
                                 //Regresar
                                 case 4:
-                                    i = 4;
+                                    b = 4;
                                     System.out.println("Saliendo al menu...");
                                 break;
                     
@@ -270,7 +269,7 @@ public class testUsuarioTrans {
                                     System.out.println("Ingrese un número valido");
                                 break;
                             }
-                        }while(i != 4);
+                        }while(b != 4);
                     break;
                     
                     //Salir
