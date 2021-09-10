@@ -19,15 +19,14 @@ public class testUsuarioTrans {
                 conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
             }
             UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
-        
             Scanner lector = new Scanner(System.in);
         
             int i = 0;
             int opcion = 0;
-        
             int UserID = 0;
             String UserName = "";
             String UserContra = "";
+            
             do
             {
                 System.out.println("Que desea realizar: ");
@@ -36,6 +35,7 @@ public class testUsuarioTrans {
                 System.out.println("3 - Eliminar");
                 System.out.println("4 - Salir");
                 opcion = lector.nextInt();
+                i = opcion;
             
                 switch(opcion)
                 {
@@ -74,12 +74,11 @@ public class testUsuarioTrans {
                         usuarioDAO.eliminar(usuarioEliminar);
                     break;
                     
-                    //Salir
-                    case 4:
-                    
+                    default:
+                        System.out.println("Ingrese un número valido");
                     break;
                 }
-            }while(i != 1);
+            }while(i != 4);
 
             /*Usuario actualizarUsuario = new Usuario();
             actualizarUsuario.setIdUsuario(1);
