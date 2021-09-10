@@ -8,6 +8,9 @@ import java.util.*;
 public class UsuarioDAO {
     
     private Connection conexionTransaccional;
+    private static int countActualizarUsuario = 0;
+    private static int countEliminarUsuario = 0;
+    private static int countInsertarUsuario = 0;
     
     //private static final int a = 3;
     private static final String SQL_SELECT = "SELECT idusuario, username, passw FROM dabase.usuario";
@@ -79,6 +82,7 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getPassw());
             
             registros = stmt.executeUpdate(); 
+            UsuarioDAO.countInsertarUsuario = countInsertarUsuario++;
             
         } 
 //        catch (SQLException ex) {
@@ -109,6 +113,7 @@ public class UsuarioDAO {
             stmt.setInt(3, usuario.getIdUsuario()); 
                         
             registros = stmt.executeUpdate(); 
+            UsuarioDAO.countActualizarUsuario = countActualizarUsuario++;
             
         } 
 //        catch (SQLException ex) {
@@ -137,6 +142,7 @@ public class UsuarioDAO {
             stmt.setInt(1, usuario.getIdUsuario());
                         
             registros = stmt.executeUpdate();
+            UsuarioDAO.countEliminarUsuario = countEliminarUsuario++;
             
         } 
 //        catch (SQLException ex) {
