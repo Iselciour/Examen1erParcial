@@ -16,19 +16,21 @@ public class testUsuarioTrans {
     public static void main(String[] args) {
         Connection conexion = null;
             
-            Scanner lector = new Scanner(System.in);
-            
-            int a = 0, b = 0, i = 0;
-            int opcionGen = 0, opcionUs = 0, opcionPer = 0;
-            int UserID = 0; 
-            int PerID = 0;
-            String UserName = "" ,UserContra = "";
-            String PerName = "", PerApellido = "", PerEmail = "", PerTel = "";
+        Scanner lector = new Scanner(System.in);
 
+        int a = 0, b = 0, c = 0, i = 0;
+        int opcionGen = 0, opcionUs = 0, opcionPer = 0;
+        int UserID = 0; 
+        int PerID = 0;
+        String UserName = "" ,UserContra = "";
+        String PerName = "", PerApellido = "", PerEmail = "", PerTel = "";
+        do
+        {
             System.out.println("Acceder a: ");
             System.out.println("1 - Usuarios");
             System.out.println("2 - Personas");
-            System.out.println("3 - Salir");
+            System.out.println("3 - Contadores");
+            System.out.println("4 - Salir");
             opcionGen = lector.nextInt();
             a = opcionGen;
 
@@ -265,26 +267,38 @@ public class testUsuarioTrans {
                     }
                 break;
                 
+                case 3:
+                    System.out.println("Que contador quieres consultar: ");
+                    System.out.println("1 - Contador Agregar");
+                    System.out.println("2 - Contador Actualizar");
+                    System.out.println("3 - Contador Eliminar");
+                    opcionUs = lector.nextInt();
+                    c = opcionUs;
+                    
+                    switch(c)
+                    {
+                        case 1:
+                            
+                        break;
+                        
+                        case 2:
+                            
+                        break;
+                        
+                        case 3:
+                            
+                        break;
+                        
+                        default:
+                            System.out.println("Ingrese un número valido");
+                        break;
+                    }
+                break;
+                    
                 default:
                     System.out.println("Ingrese un número valido");
                 break;
-            }            
-
-            /*Usuario actualizarUsuario = new Usuario();
-            actualizarUsuario.setIdUsuario(1);
-            actualizarUsuario.setUsername("hello");
-            actualizarUsuario.setPassw("35435345345");
-            usuarioDAO.actualizar(actualizarUsuario);
-            
-
-            Usuario nuevaUsuario = new Usuario();
-            nuevaUsuario.setUsername("Shakira");
-            nuevaUsuario.setPassw("Piqué");
-            usuarioDAO.insertar(nuevaUsuario);
-           
-            conexion.commit();
-            System.out.println("Se realizaron correctamente las modificaciones en la BD");*/
-            
-    }
-    
+            }  
+        }while(a != 4);
+    }   
 }
