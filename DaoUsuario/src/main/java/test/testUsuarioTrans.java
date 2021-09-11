@@ -7,6 +7,7 @@ import datos.PersonaDAO;
 import domain.Usuario;
 import domain.Persona;
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +51,8 @@ public class testUsuarioTrans {
                         System.out.println("2 - Actualizar");
                         System.out.println("3 - Eliminar");
                         System.out.println("4 - Contador");
-                        System.out.println("5 - Regresar");
+                        System.out.println("5 - Listado");
+                        System.out.println("6 - Regresar");
                         opcionUs = lector.nextInt();
                         i = opcionUs;
 
@@ -109,12 +111,25 @@ public class testUsuarioTrans {
                                     System.out.println("\nUsuarios actualizados: " + Ua);
                                     System.out.println("\n");
                             break;
+                            
+                            case 5:
+                                List<Usuario> usuarios = usuarioDAO.seleccionar();
+                                usuarios.forEach(usuario -> {
+                                System.out.println(usuario);
+                                });
+                                System.out.println("\n");
+                            break;
+                            
+                            case 6:
+                                    i = 6;
+                                    System.out.println("\nSaliendo...\n");
+                            break;
 
                             default:
-                                System.out.println("Saliendo");
+                                System.out.println("\nSeleccione un numero valido...\n");
                             break;
                         }
-                    }while(i != 5);
+                    }while(i != 6);
                 break;
 
                 //Persona
@@ -127,7 +142,8 @@ public class testUsuarioTrans {
                         System.out.println("2 - Actualizar");
                         System.out.println("3 - Eliminar");
                         System.out.println("4 - Contador");
-                        System.out.println("5 - Regresar");
+                        System.out.println("5 - Listado");
+                        System.out.println("6 - Regresar");
                         opcionPer = lector.nextInt();
                         b = opcionPer;
 
@@ -197,12 +213,25 @@ public class testUsuarioTrans {
                                     System.out.println("\nPersonas actualizados: " + Pa);
                                     System.out.println("\n");
                             break;
+                            
+                            case 5:
+                                    List<Persona> personas = personaDAO.seleccionar();
+                                    personas.forEach(persona -> {
+                                    System.out.println(persona);
+                                    });
+                                    System.out.println("\n");
+                            break;
+                            
+                            case 6:
+                                    b = 6;
+                                    System.out.println("\nSaliendo...\n");
+                            break;
 
                             default:
-                                System.out.println("Saliendo...");
+                                System.out.println("\nSeleccione un numero valido...\n");
                             break;
                         }
-                    }while(b != 5);
+                    }while(b != 6);
                 break;
                     
                 default:
