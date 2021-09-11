@@ -1,7 +1,13 @@
 package test;
 
 import datos.Conexion;
+<<<<<<< Updated upstream
 import datos.PersonaDAO;
+=======
+import datos.UsuarioDAO;
+import datos.PersonaDAO;
+import domain.Usuario;
+>>>>>>> Stashed changes
 import domain.Persona;
 import java.sql.*;
 import java.util.Scanner;
