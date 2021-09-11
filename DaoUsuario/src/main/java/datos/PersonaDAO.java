@@ -8,15 +8,13 @@ import java.util.*;
 public class PersonaDAO {
     
     private Connection conTran;
-    private static int countActualizarPersona = 0;
-    private static int countEliminarPersona = 0;
-    private static int countInsertarPersona = 0;
     
     //private static final int a = 3;
     private static final String SQL_SELECT = "SELECT idpersona, nombre, apellido, email, telefono FROM dabase.persona";
     private static final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, email, telefono) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE idpersona = ?";
     private static final String SQL_DELETE = "DELETE FROM persona WHERE idpersona=?";
+    
     
     public PersonaDAO(){
         
@@ -85,7 +83,6 @@ public class PersonaDAO {
             stmt.setString(4, persona.getTelefono());
             
             registros = stmt.executeUpdate();
-            PersonaDAO.countInsertarPersona = countInsertarPersona++;
             
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -116,8 +113,7 @@ public class PersonaDAO {
             stmt.setString(4, persona.getTelefono());
             stmt.setInt(5, persona.getIdPersona()); 
                         
-            registros = stmt.executeUpdate(); 
-            PersonaDAO.countActualizarPersona = countActualizarPersona++;
+            registros = stmt.executeUpdate();
             
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -145,7 +141,6 @@ public class PersonaDAO {
             stmt.setInt(1, persona.getIdPersona());
                         
             registros = stmt.executeUpdate();
-            this.countEliminarPersona = countEliminarPersona++;
             
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);

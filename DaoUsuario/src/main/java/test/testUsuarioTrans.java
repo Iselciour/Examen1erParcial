@@ -13,12 +13,16 @@ import java.util.logging.Logger;
 
 public class testUsuarioTrans {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Connection conexion = null;
+        PersonaDAO personaDAO = new PersonaDAO(conexion);
+        UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
             
         Scanner lector = new Scanner(System.in);
 
         int a = 0, b = 0, c = 0, i = 0;
+        int Ua = 0, Ue = 0, Ui = 0;
+        int Pa = 0, Pe = 0, Pi = 0;
         int opcionGen = 0, opcionUs = 0, opcionPer = 0;
         int UserID = 0; 
         int PerID = 0;
@@ -29,10 +33,10 @@ public class testUsuarioTrans {
             System.out.println("Acceder a: ");
             System.out.println("1 - Usuarios");
             System.out.println("2 - Personas");
-            System.out.println("3 - Contadores");
-            System.out.println("4 - Salir");
+            System.out.println("* - Salir");
             opcionGen = lector.nextInt();
             a = opcionGen;
+            System.out.println("\n");
 
             switch(opcionGen)
             {
@@ -42,7 +46,8 @@ public class testUsuarioTrans {
                     System.out.println("1 - Agregar");
                     System.out.println("2 - Actualizar");
                     System.out.println("3 - Eliminar");
-                    System.out.println("4 - Regresar");
+                    System.out.println("4 - Contador");
+                    System.out.println("* - Salir");
                     opcionUs = lector.nextInt();
                     i = opcionUs;
 
@@ -50,12 +55,6 @@ public class testUsuarioTrans {
                     {
                         //Agregar Usuario
                         case 1:
-                            UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nVa a agregar un nuevo Usuario, proporcione lo siguiente:");
                                 System.out.println("Usuario: ");
                                 UserName = lector.next();
@@ -66,25 +65,12 @@ public class testUsuarioTrans {
                                 nuevaUsuario.setPassw(UserContra);
                                 usuarioDAO.insertar(nuevaUsuario);
                                 System.out.println("Usuario agregado con exito..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                            try {
-                                conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            }
+                                Ui++;
+                            
                         break;
 
                         //Actualizar Usuario
                         case 2:
-                            UsuarioDAO usuarioDAOO = new UsuarioDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nPara actualizar un Usuario, proporcione lo siguiente:");
                                 System.out.println("ID:");
                                 UserID = lector.nextInt();
@@ -96,52 +82,33 @@ public class testUsuarioTrans {
                                 actualizarUsuario.setIdUsuario(UserID);
                                 actualizarUsuario.setUsername(UserName);
                                 actualizarUsuario.setPassw(UserContra);
-                                usuarioDAOO.actualizar(actualizarUsuario);
+                                usuarioDAO.actualizar(actualizarUsuario);
                                 System.out.println("Usuario actualizado correctamente..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                            try {
-                                conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            }
+                                Ua++;
+                            
                         break;
 
                         //Eliminar Usuario
                         case 3:
-                            UsuarioDAO usuarioDAOOO = new UsuarioDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nPara eliminar un Usuario, introduzca el ID:");
                                 System.out.println("ID:");
                                 UserID = lector.nextInt();
                                 Usuario usuarioEliminar = new Usuario(UserID);
-                                usuarioDAOOO.eliminar(usuarioEliminar);
+                                usuarioDAO.eliminar(usuarioEliminar);
                                 System.out.println("Usuario eliminando..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                                try {
-                                    conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            } 
+                                Ue++;
                         break;
 
                         //Regresar
                         case 4:
-                            i = 4;
-                            System.out.println("Saliendo al menu...");
+                                System.out.println("\nUsuarios insertados: " + Ui);
+                                System.out.println("\nUsuarios eliminados: " + Ue);
+                                System.out.println("\nUsuarios actualizados: " + Ua);
+                                System.out.println("\n");
                         break;
 
                         default:
-                            System.out.println("Ingrese un número valido");
+                            System.out.println("Saliendo");
                         break;
                     }
                 break;
@@ -152,7 +119,8 @@ public class testUsuarioTrans {
                     System.out.println("1 - Agregar");
                     System.out.println("2 - Actualizar");
                     System.out.println("3 - Eliminar");
-                    System.out.println("4 - Regresar");
+                    System.out.println("4 - Contador");
+                    System.out.println("* - Salir");
                     opcionPer = lector.nextInt();
                     b = opcionPer;
 
@@ -160,12 +128,6 @@ public class testUsuarioTrans {
                     {
                         //Agregar Persona
                         case 1:
-                            PersonaDAO personaDAO = new PersonaDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nVa a agregar una nueva Persona, proporcione lo siguiente:");
                                 System.out.println("Nombre: ");
                                 PerName = lector.next();
@@ -182,25 +144,12 @@ public class testUsuarioTrans {
                                 nuevaPersona.setTelefono(PerTel);
                                 personaDAO.insertar(nuevaPersona);
                                 System.out.println("Persona agregadada con exito..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                            try {
-                                conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            }
+                                Pi++;
+                            
                         break;
 
                         //Actualizar Persona
                         case 2:
-                            PersonaDAO personaDAOO = new PersonaDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nPara actualizar una Persona, proporcione lo siguiente:");
                                 System.out.println("ID: ");
                                 PerID = lector.nextInt();
@@ -218,85 +167,38 @@ public class testUsuarioTrans {
                                 actualizarPersona.setApellido(PerApellido);
                                 actualizarPersona.setEmail(PerEmail);
                                 actualizarPersona.setTelefono(PerTel);
-                                personaDAOO.actualizar(actualizarPersona);
+                                personaDAO.actualizar(actualizarPersona);
                                 System.out.println("Persona actualizada con exito..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                            try {
-                                conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            }
+                                Pa++;
                         break;
 
                         //Eliminar Persona
                         case 3:
-                            PersonaDAO personaDAOOO = new PersonaDAO(conexion);
-                            try {
-                                conexion = Conexion.getConnection();
-                                if(conexion.getAutoCommit()){
-                                    conexion.setAutoCommit(false);// Para no hacer automaticamente el commit
-                                }
                                 System.out.println("\nPara eliminar una Persona, introduzca el ID:");
                                 System.out.println("ID: ");
                                 PerID = lector.nextInt();
                                 Persona PersonaEliminar = new Persona(PerID);
-                                personaDAOOO.eliminar(PersonaEliminar);
+                                personaDAO.eliminar(PersonaEliminar);
                                 System.out.println("Persona eliminada con exito..." + "\n");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace(System.out);
-                                System.out.println("Entramos al rollback - no fue posible realizar cambios");
-                            try {
-                                conexion.rollback();
-                                } catch (SQLException ex1) {
-                                    ex1.printStackTrace(System.out);
-                                }
-                            } 
+                                Pe++;
+                            
                         break;
-                        //Regresar
+                        //Contadores
                         case 4:
-                            b = 4;
-                            System.out.println("Saliendo al menu...");
+                                System.out.println("\nPersonas insertados: " + Pi);
+                                System.out.println("\nPersonas eliminados: " + Pe);
+                                System.out.println("\nPersonas actualizados: " + Pa);
+                                System.out.println("\n");
                         break;
 
                         default:
-                            System.out.println("Ingrese un número valido");
-                        break;
-                    }
-                break;
-                
-                case 3:
-                    System.out.println("Que contador quieres consultar: ");
-                    System.out.println("1 - Contador Agregar");
-                    System.out.println("2 - Contador Actualizar");
-                    System.out.println("3 - Contador Eliminar");
-                    opcionUs = lector.nextInt();
-                    c = opcionUs;
-                    
-                    switch(c)
-                    {
-                        case 1:
-                            
-                        break;
-                        
-                        case 2:
-                            
-                        break;
-                        
-                        case 3:
-                            
-                        break;
-                        
-                        default:
-                            System.out.println("Ingrese un número valido");
+                            System.out.println("Saliendo...");
                         break;
                     }
                 break;
                     
                 default:
-                    System.out.println("Ingrese un número valido");
+                    System.out.println("Saliendo....");
                 break;
             }  
         }while(a != 4);

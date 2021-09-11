@@ -26,6 +26,18 @@ public class UsuarioDAO {
         this.conexionTransaccional = conexionTransaccional;
     }
     
+    public int getContadorActUsuario(){
+        return UsuarioDAO.countActualizarUsuario;
+    }
+    
+    public int getContadorEliUsuario(){
+        return UsuarioDAO.countEliminarUsuario;
+    }
+    
+    public int getContadorInsUsuario(){
+        return UsuarioDAO.countInsertarUsuario;
+    }
+    
     public List<Usuario> seleccionar() throws SQLException{
         //Inicializar parametros de conexión
         Connection conn = null;
