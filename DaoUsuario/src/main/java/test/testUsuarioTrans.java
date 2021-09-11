@@ -20,7 +20,7 @@ public class testUsuarioTrans {
             
         Scanner lector = new Scanner(System.in);
 
-        int a = 0, b = 0, c = 0, i = 0;
+        int a = 0, b = 0, i = 0;
         int Ua = 0, Ue = 0, Ui = 0;
         int Pa = 0, Pe = 0, Pi = 0;
         int opcionGen = 0, opcionUs = 0, opcionPer = 0;
@@ -42,159 +42,167 @@ public class testUsuarioTrans {
             {
                 //Usuario
                 case 1:
-                    System.out.println("Que desea realizar: ");
-                    System.out.println("1 - Agregar");
-                    System.out.println("2 - Actualizar");
-                    System.out.println("3 - Eliminar");
-                    System.out.println("4 - Contador");
-                    System.out.println("* - Salir");
-                    opcionUs = lector.nextInt();
-                    i = opcionUs;
-
-                    switch(opcionUs)
+                    do
                     {
-                        //Agregar Usuario
-                        case 1:
-                                System.out.println("\nVa a agregar un nuevo Usuario, proporcione lo siguiente:");
-                                System.out.println("Usuario: ");
-                                UserName = lector.next();
-                                System.out.println("Contraseña: ");
-                                UserContra = lector.next();
-                                Usuario nuevaUsuario = new Usuario();
-                                nuevaUsuario.setUsername(UserName);
-                                nuevaUsuario.setPassw(UserContra);
-                                usuarioDAO.insertar(nuevaUsuario);
-                                System.out.println("Usuario agregado con exito..." + "\n");
-                                Ui++;
-                            
-                        break;
+                        System.out.println("USUARIO");
+                        System.out.println("Que desea realizar: ");
+                        System.out.println("1 - Agregar");
+                        System.out.println("2 - Actualizar");
+                        System.out.println("3 - Eliminar");
+                        System.out.println("4 - Contador");
+                        System.out.println("5 - Regresar");
+                        opcionUs = lector.nextInt();
+                        i = opcionUs;
 
-                        //Actualizar Usuario
-                        case 2:
-                                System.out.println("\nPara actualizar un Usuario, proporcione lo siguiente:");
-                                System.out.println("ID:");
-                                UserID = lector.nextInt();
-                                System.out.println("Usuario:");
-                                UserName = lector.next();
-                                System.out.println("Contraseña:");
-                                UserContra = lector.next();
-                                Usuario actualizarUsuario = new Usuario();
-                                actualizarUsuario.setIdUsuario(UserID);
-                                actualizarUsuario.setUsername(UserName);
-                                actualizarUsuario.setPassw(UserContra);
-                                usuarioDAO.actualizar(actualizarUsuario);
-                                System.out.println("Usuario actualizado correctamente..." + "\n");
-                                Ua++;
-                            
-                        break;
+                        switch(opcionUs)
+                        {
+                            //Agregar Usuario
+                            case 1:
+                                    System.out.println("\nVa a agregar un nuevo Usuario, proporcione lo siguiente:");
+                                    System.out.println("Usuario: ");
+                                    UserName = lector.next();
+                                    System.out.println("Contraseña: ");
+                                    UserContra = lector.next();
+                                    Usuario nuevaUsuario = new Usuario();
+                                    nuevaUsuario.setUsername(UserName);
+                                    nuevaUsuario.setPassw(UserContra);
+                                    usuarioDAO.insertar(nuevaUsuario);
+                                    System.out.println("Usuario agregado con exito..." + "\n");
+                                    Ui++;
 
-                        //Eliminar Usuario
-                        case 3:
-                                System.out.println("\nPara eliminar un Usuario, introduzca el ID:");
-                                System.out.println("ID:");
-                                UserID = lector.nextInt();
-                                Usuario usuarioEliminar = new Usuario(UserID);
-                                usuarioDAO.eliminar(usuarioEliminar);
-                                System.out.println("Usuario eliminando..." + "\n");
-                                Ue++;
-                        break;
+                            break;
 
-                        //Regresar
-                        case 4:
-                                System.out.println("\nUsuarios insertados: " + Ui);
-                                System.out.println("\nUsuarios eliminados: " + Ue);
-                                System.out.println("\nUsuarios actualizados: " + Ua);
-                                System.out.println("\n");
-                        break;
+                            //Actualizar Usuario
+                            case 2:
+                                    System.out.println("\nPara actualizar un Usuario, proporcione lo siguiente:");
+                                    System.out.println("ID:");
+                                    UserID = lector.nextInt();
+                                    System.out.println("Usuario:");
+                                    UserName = lector.next();
+                                    System.out.println("Contraseña:");
+                                    UserContra = lector.next();
+                                    Usuario actualizarUsuario = new Usuario();
+                                    actualizarUsuario.setIdUsuario(UserID);
+                                    actualizarUsuario.setUsername(UserName);
+                                    actualizarUsuario.setPassw(UserContra);
+                                    usuarioDAO.actualizar(actualizarUsuario);
+                                    System.out.println("Usuario actualizado correctamente..." + "\n");
+                                    Ua++;
 
-                        default:
-                            System.out.println("Saliendo");
-                        break;
-                    }
+                            break;
+
+                            //Eliminar Usuario
+                            case 3:
+                                    System.out.println("\nPara eliminar un Usuario, introduzca el ID:");
+                                    System.out.println("ID:");
+                                    UserID = lector.nextInt();
+                                    Usuario usuarioEliminar = new Usuario(UserID);
+                                    usuarioDAO.eliminar(usuarioEliminar);
+                                    System.out.println("Usuario eliminando..." + "\n");
+                                    Ue++;
+                            break;
+
+                            //Regresar
+                            case 4:
+                                    System.out.println("\nUsuarios insertados: " + Ui);
+                                    System.out.println("\nUsuarios eliminados: " + Ue);
+                                    System.out.println("\nUsuarios actualizados: " + Ua);
+                                    System.out.println("\n");
+                            break;
+
+                            default:
+                                System.out.println("Saliendo");
+                            break;
+                        }
+                    }while(i != 5);
                 break;
 
                 //Persona
                 case 2:
-                    System.out.println("Que desea realizar: ");
-                    System.out.println("1 - Agregar");
-                    System.out.println("2 - Actualizar");
-                    System.out.println("3 - Eliminar");
-                    System.out.println("4 - Contador");
-                    System.out.println("* - Salir");
-                    opcionPer = lector.nextInt();
-                    b = opcionPer;
-
-                    switch(opcionPer)
+                    do
                     {
-                        //Agregar Persona
-                        case 1:
-                                System.out.println("\nVa a agregar una nueva Persona, proporcione lo siguiente:");
-                                System.out.println("Nombre: ");
-                                PerName = lector.next();
-                                System.out.println("Apellido: ");
-                                PerApellido = lector.next();
-                                System.out.println("Email: ");
-                                PerEmail = lector.next();
-                                System.out.println("Telefono: ");
-                                PerTel = lector.next();
-                                Persona nuevaPersona = new Persona();
-                                nuevaPersona.setNombre(PerName);
-                                nuevaPersona.setApellido(PerApellido);
-                                nuevaPersona.setEmail(PerEmail);
-                                nuevaPersona.setTelefono(PerTel);
-                                personaDAO.insertar(nuevaPersona);
-                                System.out.println("Persona agregadada con exito..." + "\n");
-                                Pi++;
-                            
-                        break;
+                        System.out.println("PERSONA");
+                        System.out.println("Que desea realizar: ");
+                        System.out.println("1 - Agregar");
+                        System.out.println("2 - Actualizar");
+                        System.out.println("3 - Eliminar");
+                        System.out.println("4 - Contador");
+                        System.out.println("5 - Regresar");
+                        opcionPer = lector.nextInt();
+                        b = opcionPer;
 
-                        //Actualizar Persona
-                        case 2:
-                                System.out.println("\nPara actualizar una Persona, proporcione lo siguiente:");
-                                System.out.println("ID: ");
-                                PerID = lector.nextInt();
-                                System.out.println("Nombre: ");
-                                PerName = lector.next();
-                                System.out.println("Apellido: ");
-                                PerApellido = lector.next();
-                                System.out.println("Email: ");
-                                PerEmail = lector.next();
-                                System.out.println("Telefono: ");
-                                PerTel = lector.next();
-                                Persona actualizarPersona = new Persona();
-                                actualizarPersona.setIdPersona(PerID);
-                                actualizarPersona.setNombre(PerName);
-                                actualizarPersona.setApellido(PerApellido);
-                                actualizarPersona.setEmail(PerEmail);
-                                actualizarPersona.setTelefono(PerTel);
-                                personaDAO.actualizar(actualizarPersona);
-                                System.out.println("Persona actualizada con exito..." + "\n");
-                                Pa++;
-                        break;
+                        switch(opcionPer)
+                        {
+                            //Agregar Persona
+                            case 1:
+                                    System.out.println("\nVa a agregar una nueva Persona, proporcione lo siguiente:");
+                                    System.out.println("Nombre: ");
+                                    PerName = lector.next();
+                                    System.out.println("Apellido: ");
+                                    PerApellido = lector.next();
+                                    System.out.println("Email: ");
+                                    PerEmail = lector.next();
+                                    System.out.println("Telefono: ");
+                                    PerTel = lector.next();
+                                    Persona nuevaPersona = new Persona();
+                                    nuevaPersona.setNombre(PerName);
+                                    nuevaPersona.setApellido(PerApellido);
+                                    nuevaPersona.setEmail(PerEmail);
+                                    nuevaPersona.setTelefono(PerTel);
+                                    personaDAO.insertar(nuevaPersona);
+                                    System.out.println("Persona agregadada con exito..." + "\n");
+                                    Pi++;
 
-                        //Eliminar Persona
-                        case 3:
-                                System.out.println("\nPara eliminar una Persona, introduzca el ID:");
-                                System.out.println("ID: ");
-                                PerID = lector.nextInt();
-                                Persona PersonaEliminar = new Persona(PerID);
-                                personaDAO.eliminar(PersonaEliminar);
-                                System.out.println("Persona eliminada con exito..." + "\n");
-                                Pe++;
-                            
-                        break;
-                        //Contadores
-                        case 4:
-                                System.out.println("\nPersonas insertados: " + Pi);
-                                System.out.println("\nPersonas eliminados: " + Pe);
-                                System.out.println("\nPersonas actualizados: " + Pa);
-                                System.out.println("\n");
-                        break;
+                            break;
 
-                        default:
-                            System.out.println("Saliendo...");
-                        break;
-                    }
+                            //Actualizar Persona
+                            case 2:
+                                    System.out.println("\nPara actualizar una Persona, proporcione lo siguiente:");
+                                    System.out.println("ID: ");
+                                    PerID = lector.nextInt();
+                                    System.out.println("Nombre: ");
+                                    PerName = lector.next();
+                                    System.out.println("Apellido: ");
+                                    PerApellido = lector.next();
+                                    System.out.println("Email: ");
+                                    PerEmail = lector.next();
+                                    System.out.println("Telefono: ");
+                                    PerTel = lector.next();
+                                    Persona actualizarPersona = new Persona();
+                                    actualizarPersona.setIdPersona(PerID);
+                                    actualizarPersona.setNombre(PerName);
+                                    actualizarPersona.setApellido(PerApellido);
+                                    actualizarPersona.setEmail(PerEmail);
+                                    actualizarPersona.setTelefono(PerTel);
+                                    personaDAO.actualizar(actualizarPersona);
+                                    System.out.println("Persona actualizada con exito..." + "\n");
+                                    Pa++;
+                            break;
+
+                            //Eliminar Persona
+                            case 3:
+                                    System.out.println("\nPara eliminar una Persona, introduzca el ID:");
+                                    System.out.println("ID: ");
+                                    PerID = lector.nextInt();
+                                    Persona PersonaEliminar = new Persona(PerID);
+                                    personaDAO.eliminar(PersonaEliminar);
+                                    System.out.println("Persona eliminada con exito..." + "\n");
+                                    Pe++;
+
+                            break;
+                            //Contadores
+                            case 4:
+                                    System.out.println("\nPersonas insertados: " + Pi);
+                                    System.out.println("\nPersonas eliminados: " + Pe);
+                                    System.out.println("\nPersonas actualizados: " + Pa);
+                                    System.out.println("\n");
+                            break;
+
+                            default:
+                                System.out.println("Saliendo...");
+                            break;
+                        }
+                    }while(b != 5);
                 break;
                     
                 default:
